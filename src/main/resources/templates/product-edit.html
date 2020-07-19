@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+</head>
+<body>
+<h1 th:text="${add} ? 'Create a product:' : 'Edit a product:'"/>
+<a th:href="@{/productlist}">Back to Product List</a>
+<br/><br/>
+<form th:action="${add} ? @{/productlist/add} : @{/productlist/{productId}/edit(productId=${product.id})}"
+      th:object="${product}" method="POST">
+    <table border="0">
+        <tr th:if="${product.id}">
+            <td>ID</td>
+            <td>:</td>
+            <td th:utext="${product.id}">...</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Article</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{article}"/></td>
+        </tr>
+        <tr>
+            <td>Producer</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{producer}"/></td>
+        </tr>
+        <tr>
+            <td>Shelf-life (days)</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{shelfLife}"/></td>
+        </tr>
+    </table>
+    <input type="submit" th:value="${add} ? 'Create' : 'Update'"/>
+</form>
+
+</body>
+</html>

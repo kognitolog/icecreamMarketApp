@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+</head>
+<body>
+<h1>Product list</h1>
+<div>
+    <a th:href="@{/productlist/add}"> + Add product </a>
+</div>
+<div>
+    <table border="1px">
+        <thead>
+        <tr>
+            <th> id</th>
+            <th> Title</th>
+            <th> Article</th>
+            <th> Producer</th>
+            <th> Shelf-life</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(productlist)}">
+            <td colspan="2"> No products Available</td>
+        </tr>
+        <tr th:each="product : ${productlist}">
+            <td><span th:text="${product.id}"> ID </span></td>
+            <td><span th:text="${product.name}"> Title </span></td>
+            <td><span th:text="${product.article}"> Article </span></td>
+            <td><span th:text="${product.producer}"> Producer </span></td>
+            <td><span th:text="${product.shelfLife}"> Shelf-life (days)</span></td>
+            <td><a th:href="@{/productlist/{productId}/edit(productId=${product.id})}">Edit</a></td>
+            <td><a th:href="@{/productlist/{productId}/remove(productId=${product.id})}">×</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a th:href="@{/desktop}"> < Back </a>
+</div>
+
+</body>
+</html>
